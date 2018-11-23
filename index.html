@@ -210,7 +210,7 @@
     const combine_seed = data.bet_id + "-" + data.bettor + "-" + data.playerSeed + "-" + data.bet_time;
     document.getElementById("combine_seed").textContent = combine_seed;
     document.getElementById("hash").textContent = eosjs_ecc.sha256(combine_seed);
-    document.getElementById("time").textContent = formatTime(data.bet_time);
+    document.getElementById("time").textContent = formatTime(data.bet_time+'000');
     document.getElementById("formula").textContent = "(precision" + data.precision + "(sha256(sign(sha256(betid+'-'+bettor+'-'+palyerseed+'-'+timestamp))) Mod " + data.mod + ")+1";
     document.getElementById("first_text").textContent = "first " + data.precision + " digits:";
 
