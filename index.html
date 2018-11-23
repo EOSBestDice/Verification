@@ -178,6 +178,26 @@
             return unescape(r[2]);
         return "";
     }
+    
+    function formatTime (value, format = 'Y-M-D h:m:s.ms') {
+        // value是整数，否则要parseInt转换
+        let time = new Date(parseInt(value))
+        let Y = time.getFullYear()
+        let M = time.getMonth() + 1
+        M = M < 10 ? '0' + M : M
+        let D = time.getDate()
+        D = D < 10 ? '0' + D : D
+        let h = time.getHours()
+        h = h < 10 ? '0' + h : h
+        let m = time.getMinutes()
+        m = m < 10 ? '0' + m : m
+        let s = time.getSeconds()
+        s = s < 10 ? '0' + s : s
+        let ms = time.getMilliseconds()
+        ms = ms < 10 ? '00' + ms : (ms < 100 ? '0' + ms : ms)
+
+        return format.replace(/Y/g, Y).replace(/M/g, M).replace(/D/g, D).replace(/h/g, h).replace(/m/g, m).replace(/s/g, s).replace(/ms/g, ms)
+    }
 
     const data = JSON.parse(getQueryString("data"));
     for (let i in data) {
@@ -187,11 +207,10 @@
         if (item != null)
             item.textContent = data[i];
     }
-    const time = new Date(data.bet_time).getTime();
-    const combine_seed = data.bet_id + "-" + data.bettor + "-" + data.playerSeed + "-" + time;
+    const combine_seed = data.bet_id + "-" + data.bettor + "-" + data.playerSeed + "-" + data.bet_time;
     document.getElementById("combine_seed").textContent = combine_seed;
     document.getElementById("hash").textContent = eosjs_ecc.sha256(combine_seed);
-    document.getElementById("time").textContent = time;
+    document.getElementById("time").textContent = formatTime(data.bet_time);
     document.getElementById("formula").textContent = "(precision" + data.precision + "(sha256(sign(sha256(betid+'-'+bettor+'-'+palyerseed+'-'+timestamp))) Mod " + data.mod + ")+1";
     document.getElementById("first_text").textContent = "first " + data.precision + " digits:";
 
