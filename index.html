@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html data-dpr="1" style="font-size: 54px;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=320.1,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no,minimal-ui">
+    <meta name="apple-mobile-web-app-title" content="bestDice">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+
+    <title>BESTDice</title>
+    <style type="text/css">#app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        height: 100%;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch
+    }
+
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0
+    }
+
+    input {
+        outline: none
+    }
+
+    h6, p {
+        margin: 0
+    }
+    </style>
+    <style type="text/css">.verification[data-v-0d286186] {
+        background: #fff;
+        margin: 0 auto;
+        padding: 10px;
+        width: 80%;
+        text-align: left
+    }
+
+    .verification .top[data-v-0d286186] {
+        font-size: 30px;
+        padding: 20px 0;
+        color: #333;
+        border-bottom: 1px solid #dbdbdb
+    }
+
+    .verification .top .info[data-v-0d286186] {
+        font-size: 20px;
+        color: #666
+    }
+
+    .verification .content[data-v-0d286186] {
+        padding: 30px 0;
+        font-size: 24px
+    }
+
+    .verification .content .line[data-v-0d286186] {
+        padding: 10px 0 6px;
+        border-bottom: 1px solid #dbdbdb
+    }
+
+    .verification .content .line label[data-v-0d286186] {
+        display: inline-block;
+        width: 18%
+    }
+
+    .verification .content .line span[data-v-0d286186] {
+        display: inline-block;
+        width: 80%;
+        vertical-align: middle;
+        word-break: break-all
+    }
+
+    .verification .content .line .fruit img[data-v-0d286186] {
+        width: .6rem
+    }
+
+    .verification .content .btn[data-v-0d286186] {
+        margin-top: 20px;
+        font-size: 30px;
+        color: #fff;
+        width: 198px;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        background: #ff4547;
+        border-radius: 8px;
+        cursor: pointer
+    }</style>
+</head>
+<body style="font-size: 12px;">
+<div id="app">
+    <div data-v-0d286186="" class="verification">
+        <div data-v-0d286186="" class="top">
+            <div data-v-0d286186="" class="title">
+                BESTDice - Game Verification Script
+            </div>
+            <div data-v-0d286186="" class="info">
+                Third part script used to verify games on BESTDice
+            </div>
+        </div>
+        <div data-v-0d286186="" class="content">
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">betid:</label> <span data-v-0d286186=""
+                                                                                                id="bet_id"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">bettor:</label> <span data-v-0d286186=""
+                                                                                                 id="bettor"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">playerSeed:</label> <span data-v-0d286186=""
+                                                                                                     id="playerSeed"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">time stamp:</label> <span data-v-0d286186=""
+                                                                                                     id="time"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">combine_seed:</label> <span
+                    data-v-0d286186="" id="combine_seed"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">combine_seed<br
+                    data-v-0d286186="">(hash):</label> <span data-v-0d286186="" id="hash"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">public key:</label> <span
+                    data-v-0d286186="" id="publicKey"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">sign:</label> <span
+                    data-v-0d286186="" id="sign"></span>
+            </div>
+            <div data-v-0d286186="" class="line"><label data-v-0d286186="">formula:</label>
+                <span data-v-0d286186="" id="formula"></span>
+            </div>
+            <div data-v-0d286186="" class="btn">
+                Verify
+            </div>
+            <div data-v-0d286186="" class="result">
+                <div data-v-0d286186="" class="line"><label data-v-0d286186="">sha256(sig):</label> <span
+                        data-v-0d286186="" id="sha256"></span></div>
+                <div data-v-0d286186="" class="line"><label data-v-0d286186="" id="first_text"></label> <span
+                        data-v-0d286186="" id="first"></span></div>
+                <div data-v-0d286186="" class="line"><label data-v-0d286186="">lucky number:</label> <span
+                        data-v-0d286186="" id="lucky"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/eosjs-ecc@4.0.4/lib/eosjs-ecc.js"></script>
+<!-- built files will be auto injected -->
+<script>
+    document.getElementsByClassName('result')[0].style.display = "none";
+    document.documentElement.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, false);
+    let lastTouchEnd = 0;
+    document.documentElement.addEventListener('touchend', function (event) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+
+    function getQueryString(name) {
+        const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        const r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return "";
+    }
+
+    const data = JSON.parse(getQueryString("data"));
+    for (let i in data) {
+        if (!data.hasOwnProperty(i))
+            continue;
+        const item = document.getElementById(i);
+        if (item != null)
+            item.textContent = data[i];
+    }
+    const time = new Date(data.bet_time).getTime();
+    const combine_seed = data.bet_id + "-" + data.bettor + "-" + data.playerSeed + "-" + time;
+    document.getElementById("combine_seed").textContent = combine_seed;
+    document.getElementById("hash").textContent = eosjs_ecc.sha256(combine_seed);
+    document.getElementById("time").textContent = time;
+    document.getElementById("formula").textContent = "(precision" + data.precision + "(sha256(sign(sha256(betid+'-'+bettor+'-'+palyerseed+'-'+timestamp))) Mod " + data.mod + ")+1";
+    document.getElementById("first_text").textContent = "first " + data.precision + " digits:";
+
+    function verify() {
+        const hash = eosjs_ecc.sha256(data.sign);
+        const first = (hash + "").substr(0, data.precision);
+        const lucky = parseInt("0x" + first) % data.mod + 1;
+        document.getElementById("sha256").textContent = hash;
+        document.getElementById("first").textContent = first + "(" + parseInt("0x" + first) + ")";
+        document.getElementById("lucky").textContent = lucky;
+        document.getElementsByClassName('result')[0].style.display = "";
+    }
+
+    document.getElementsByClassName("btn")[0].addEventListener("click", verify);
+
+</script>
+
+
+</body>
+</html>
