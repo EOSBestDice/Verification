@@ -219,9 +219,8 @@
             arrayNum.remove(num);
         }
        
-        document.getElementById("first").textContent = "first："+first + "1(" + parseInt("0x" + first+"1") + ")   second：" + first + "2(" + parseInt("0x" + first+"2") + ")   third：" + first + "3(" + parseInt("0x" + first+"3")+“）”;
-        let luckyDoc = document.getElementById("lucky");
-        luckyDoc.textContent = lucky;
+        document.getElementById("first").textContent = firstText;
+        document.getElementById("lucky").textContent = luckyText;
         document.getElementsByClassName('result')[0].style.display = "";
     }
     document.getElementsByClassName("btn")[0].addEventListener("click", verify);
