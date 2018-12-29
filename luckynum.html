@@ -178,7 +178,6 @@
     document.getElementById("combine_seed").textContent = combine_seed;
     document.getElementById("hash").textContent = eosjs_ecc.sha256(combine_seed);
     document.getElementById("formula").textContent = "(precision5(sha256(sign(sha256(betid-last_bettor-last_num-amount)))+'ranking' Mod " + data.max_num + ")+1";
-    document.getElementById("first_text").textContent = "first 5 ’ranking‘ digits:";
     function verify() {
         const hash = eosjs_ecc.sha256(data.sign);
         const first = (hash + "").substr(0, 5);
