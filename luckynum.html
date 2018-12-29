@@ -131,7 +131,7 @@
             <div data-v-0d286186="" class="btn">
                 Verify
             </div>
-            <div data-v-0d286186="" class="result">
+            <div data-v-0d286186="" class="result" style="display: none;">
                 <div data-v-0d286186="" class="line"><label data-v-0d286186="">sha256(sig):</label> <span
                         data-v-0d286186="" id="sha256"></span></div>
                 <div data-v-0d286186="" class="line"><label data-v-0d286186="">first 5 ’ranking‘ digits:</label> <span
@@ -145,7 +145,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/eosjs-ecc@4.0.4/lib/eosjs-ecc.js"></script>
 <!-- built files will be auto injected -->
 <script>
-    document.getElementsByClassName('result')[0].style.display = "none";
     document.documentElement.addEventListener('touchstart', function (event) {
         if (event.touches.length > 1) {
             event.preventDefault();
@@ -167,24 +166,6 @@
         return "";
     }
     
-    function formatTime (value, format = 'Y-M-D h:m:s.ms') {
-        // value是整数，否则要parseInt转换
-        let time = new Date(parseInt(value))
-        let Y = time.getFullYear()
-        let M = time.getMonth() + 1
-        M = M < 10 ? '0' + M : M
-        let D = time.getDate()
-        D = D < 10 ? '0' + D : D
-        let h = time.getHours()
-        h = h < 10 ? '0' + h : h
-        let m = time.getMinutes()
-        m = m < 10 ? '0' + m : m
-        let s = time.getSeconds()
-        s = s < 10 ? '0' + s : s
-        let ms = time.getMilliseconds()
-        ms = ms < 10 ? '00' + ms : (ms < 100 ? '0' + ms : ms)
-        return format.replace(/Y/g, Y).replace(/M/g, M).replace(/D/g, D).replace(/h/g, h).replace(/m/g, m).replace(/s/g, s).replace(/ms/g, ms)
-    }
     const data = JSON.parse(getQueryString("data"));
     for (let i in data) {
         if (!data.hasOwnProperty(i))
@@ -196,7 +177,6 @@
     const combine_seed = data.bet_id + "-" + data.last_bettor + "-" + data.last_num + "-" + data.amount;
     document.getElementById("combine_seed").textContent = combine_seed;
     document.getElementById("hash").textContent = eosjs_ecc.sha256(combine_seed);
-    document.getElementById("time").textContent = formatTime(data.bet_time*1000,'Y-M-D h:m:s');
     document.getElementById("formula").textContent = "(precision5(sha256(sign(sha256(betid-last_bettor-last_num-amount)))+'ranking' Mod " + data.max_num + ")+1";
     document.getElementById("first_text").textContent = "first 5 ’ranking‘ digits:";
     function verify() {
