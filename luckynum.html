@@ -189,13 +189,11 @@
         let firstText= "";
         let luckyText= "";
         let title = ['first','second','third'];
-         console.log(JSON.stringify(arrayNum));
         for(let i =0 ;i<3;i++){
             let ranking = first+(i+1);
             let num = parseInt("0x" + ranking);
-             console.log(num);
             firstText += title[i]+":"+ranking+"("+num+")     ";
-            num = arrayNum[num / (data.max_num - i)];
+            num = arrayNum[num % (data.max_num - i)];
            console.log(num);
             luckyText += title[i]+":"+num+"     ";
             arrayNum.remove(num);
