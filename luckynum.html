@@ -193,12 +193,14 @@
             let ranking = first+(i+1);
             let num = parseInt("0x" + ranking);
             firstText += title[i]+":"+ranking+"("+num+")     ";
-            num = arrayNum[num % (data.max_num - i)];
-           console.log(num);
-            console.log(JSON.stringify(arrayNum));
-            luckyText += title[i]+":"+num+"     ";
-            arrayNum.remove(num);
-             console.log(JSON.stringify(arrayNum));
+//             num = arrayNum[num % (data.max_num - i)];
+            let roll = parseInt(first + "" + (i + 1)) % (data.max_num - i);
+            
+//            console.log(num);
+//             console.log(JSON.stringify(arrayNum));
+            luckyText += title[i]+":"+arrayNum[roll]+"     ";
+            arrayNum.remove(roll);
+//              console.log(JSON.stringify(arrayNum));
         }
        
         document.getElementById("first").textContent = firstText;
