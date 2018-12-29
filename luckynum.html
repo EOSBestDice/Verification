@@ -192,9 +192,9 @@
         for(let i =0 ;i<3;i++){
             let ranking = first+(i+1);
             let num = parseInt("0x" + ranking);
-            firstText = title[i]+":"+ranking+"("+num+")     ";
+            firstText += title[i]+":"+ranking+"("+num+")     ";
             num = arrayNum[num / (data.max_num - i)];
-            luckyText = title[i]+":"+ranking+"("+num+")     ";
+            luckyText += title[i]+":"+ranking+"("+num+")     ";
             arrayNum.remove(num);
         }
        
