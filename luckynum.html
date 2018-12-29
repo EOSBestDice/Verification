@@ -195,8 +195,10 @@
             firstText += title[i]+":"+ranking+"("+num+")     ";
             num = arrayNum[num % (data.max_num - i)];
            console.log(num);
+            console.log(JSON.stringify(arrayNum));
             luckyText += title[i]+":"+num+"     ";
             arrayNum.remove(num);
+             console.log(JSON.stringify(arrayNum));
         }
        
         document.getElementById("first").textContent = firstText;
